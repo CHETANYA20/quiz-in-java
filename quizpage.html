@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head><title>JAVA QUIZ</title>
+<meta charset="UTF-8">
+<link href="quiz.css" type="text/css" rel="stylesheet">
+<style>
+div#test{ border:#000 1px solid; padding:10px 40px 40px 40px; }
+</style>
+<script>
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0;
+var questions = [
+    [" Which of the following is Faster, StringBuilder or StringBuffer?",  "StringBuilder", "StringBuffer","Both of the above", "A"],
+	[ "Which is a valid keyword in java?", "interface", "string", "Float", "A" ],
+	[ "Which is the valid declarations within an interface definition?", "public double method();", "public final double method();", "static void method(double d1);", "A" ],
+	[ "Which one is a valid declaration of a boolean?", "boolean b3 = false;", "boolean b2 = 'false';", "boolean b4 = Boolean.false();", "A" ],
+    ["Which is a reserved word in the Java programming language?", "method", "native", "subclasses", "B"],
+    ["The order of the three top level elements of the java source file are:","Import, Package, Class","Class, Import, Package","Package, Import, Class", "C" ],
+    ["Two threads cannot simultaneously enter into the methods of the same object if the methods are:","static","synchronized","private", "B"],
+    ["Which of the following is Java keyword?","external","implement","throw", "C"],
+    [" Which of the following method is used to initialize the instance variable of a class?","class","public","constructor", "C"],
+    [" Consider the following code snippet String river = new String(“Columbia”); System.out.println(river.length()); What is the output?","6","Columbia","8", "C"],
+];
+function _(x){
+	return document.getElementById(x);
+}
+function renderQuestion(){
+	test = _("test");
+	if(pos >= questions.length){
+		test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+		_("test_status").innerHTML = "Test Completed";
+		pos = 0;
+		correct = 0;
+		return false;
+	}
+	_("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+	question = questions[pos][0];
+	chA = questions[pos][1];
+	chB = questions[pos][2];
+	chC = questions[pos][3];
+	test.innerHTML = "<h4>"+question+"</h4>";
+	test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br><br>";
+	test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+}
+function checkAnswer(){
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+		if(choices[i].checked){
+			choice = choices[i].value;
+		}
+	}
+	if(choice == questions[pos][4]){
+		correct++;
+	}
+	pos++;
+	renderQuestion();
+}
+ /*$(document).ready( function() {
+        $('#deletesuccess').delay(10000).fadeOut();
+      });*/
+window.addEventListener("load", renderQuestion, false);
+</script>
+</head>
+<body>
+    <embed src="music_box.mp3" autostart="true" loop="false"
+width="2" height="0">
+    </embed>
+      <div class="timecounter" >
+			<script type="text/javascript">
+						function countDown(secs,elem){
+							var element = document.getElementById(elem);
+				        	element.innerHTML = "Time-Left : "+secs+ " s";
+							if(secs < 1){
+							clearTimeout(timer);
+							
+							element.innerHTML = '<br><br><h3 style="color:red;font-family:arial;">!! Test Completed !!</h3>';
+							element.innerHTML += 'Your Test Succesfully Submitted !!';
+							
+							}
+							secs--;
+							var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
+							}
+							
+		
+			</script>
+					<div id="status" ></div>
+					<script type="text/javascript">countDown(60,"status");
+                       
+                    </script>
+	 </div>
+    <h2 id="test_status"></h2>
+    <div id="test"></div>	 
+</body>
+</html>
+
+
+
+
+
